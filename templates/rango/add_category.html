@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 {% block title %}Add category{% endblock %}
     {% block body_block %}
-        <form id="category_form" method="post" action="{% url 'add_category' %}">
+    <div class="page-header">
+        <h1>Add a category</h1>
+    </div>
+    <div>
+        <form role="form" id="category_form" method="post" action="{% url 'add_category' %}">
 
             {% csrf_token %}
             {% for hidden in form.hidden_fields %}
@@ -14,6 +18,7 @@
                 {{ field }}
             {% endfor %}
 
-            <input type="submit" name="submit" value="Create Category" />
+            <button class="btn btn-primary" type="submit" name="submit">Add Category</button>
         </form>
+        </div>
     {% endblock %}
