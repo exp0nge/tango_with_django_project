@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title%}About{% endblock %}
+        {% block body_block %}
+            <h3>You have visited the site: {{ visits }} times today!</h3>
+        <img src="{% static "/media/mundo.png" %}" alt="Picture of Mundo" />
+        {% endblock %}
