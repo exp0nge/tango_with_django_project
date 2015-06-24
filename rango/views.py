@@ -162,3 +162,18 @@ def search(request):
             result_list = run_query(query)
 
     return render(request, 'rango/search.html', {'result_list': result_list})
+
+
+def track_view(request):
+    if request.method == 'GET':
+        if 'page_id' in request.GET:
+            page_id = request.GET['page_id']
+            try:
+                page = Page.objects.get(id=page_id)
+                page.views += 1
+                page.save()
+                return HttpResponseRedirect(page.url)
+            except Page.DoesNotExist:
+                return HttpResponseRedirect('/rango/')
+        else:
+            return HttpResponseRedirect('/rango/')
