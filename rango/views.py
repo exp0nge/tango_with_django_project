@@ -57,6 +57,16 @@ def category(request, category_name_slug):
     except Category.DoesNotExist:
         pass
     context_dict['category_name_slug'] = category_name_slug
+
+    if request.method == 'POST':
+        result_list = []
+        if request.method == 'POST':
+            query = request.POST['query'].strip()
+
+            if query:
+                result_list = run_query(query)
+                context_dict['result_list'] = result_list
+
     return render(request, 'rango/category.html', context_dict)
 
 @login_required
@@ -151,17 +161,6 @@ def restricted(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/rango/')
-
-
-def search(request):
-    result_list = []
-    if request.method == 'POST':
-        query = request.POST['query'].strip()
-
-        if query:
-            result_list = run_query(query)
-
-    return render(request, 'rango/search.html', {'result_list': result_list})
 
 
 def track_view(request):
