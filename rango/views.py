@@ -62,10 +62,11 @@ def category(request, category_name_slug):
         result_list = []
         if request.method == 'POST':
             query = request.POST['query'].strip()
-
+            print query
             if query:
                 result_list = run_query(query)
                 context_dict['result_list'] = result_list
+                print result_list
 
     return render(request, 'rango/category.html', context_dict)
 
